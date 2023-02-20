@@ -42,6 +42,9 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders; 
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ShoppingCart> shopping_cart;
+	
 	@ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -55,15 +58,15 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
-    private Set<Product> products;
+    private Set<Product> products; 
 	
 	public User() {}
 
-	public User(String id, Role role, String username, String first_name, String last_name, String email,
-			String password, boolean is_active, Date created_at) {
+	public User(String id, String username, String first_name, String last_name, String email, String password,
+			boolean is_active, Date created_at, List<Order> orders, Set<ShoppingCart> shopping_cart, Role role,
+			Set<Product> products) {
 		super();
 		this.id = id;
-		this.role = role;
 		this.username = username;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -71,6 +74,10 @@ public class User {
 		this.password = password;
 		this.is_active = is_active;
 		this.created_at = created_at;
+		this.orders = orders;
+		this.shopping_cart = shopping_cart;
+		this.role = role;
+		this.products = products;
 	}
 
 	public String getId() {
@@ -79,14 +86,6 @@ public class User {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
 	}
 
 	public String getUsername() {
@@ -143,6 +142,38 @@ public class User {
 
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Set<ShoppingCart> getShopping_cart() {
+		return shopping_cart;
+	}
+
+	public void setShopping_cart(Set<ShoppingCart> shopping_cart) {
+		this.shopping_cart = shopping_cart;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.ulsa.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
@@ -31,11 +32,20 @@ public class Product {
 	@CreatedDate
 	@Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "DATE")
 	private Date created_at;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ShoppingCart> shopping_cart;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderProducts> order_products;
+	
+	@ManyToMany(mappedBy = "products")
+    private Set<User> users;
 
-	public Product() {
-	}
+	public Product() {}
 
-	public Product(String id, String name, String description, float price, List<String> tags, Date created_at) {
+	public Product(String id, String name, String description, float price, List<String> tags, Date created_at,
+			Set<ShoppingCart> shopping_cart, Set<OrderProducts> order_products, Set<User> users) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,6 +53,9 @@ public class Product {
 		this.price = price;
 		this.tags = tags;
 		this.created_at = created_at;
+		this.shopping_cart = shopping_cart;
+		this.order_products = order_products;
+		this.users = users;
 	}
 
 	public String getId() {
@@ -93,4 +106,28 @@ public class Product {
 		this.created_at = created_at;
 	}
 
+	public Set<ShoppingCart> getShopping_cart() {
+		return shopping_cart;
+	}
+
+	public void setShopping_cart(Set<ShoppingCart> shopping_cart) {
+		this.shopping_cart = shopping_cart;
+	}
+
+	public Set<OrderProducts> getOrder_products() {
+		return order_products;
+	}
+
+	public void setOrder_products(Set<OrderProducts> order_products) {
+		this.order_products = order_products;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+	
 }

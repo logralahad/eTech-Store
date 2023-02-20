@@ -3,8 +3,8 @@ package com.ulsa.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "shopping_cart")
-public class ShoppingCart {
+@Table(name = "order_products")
+public class OrderProducts {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,17 +18,17 @@ public class ShoppingCart {
     private Product product;
 	
 	@ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "order_id")
+    private Order order;
 	
-	public ShoppingCart() {}
+	public OrderProducts() {}
 
-	public ShoppingCart(long id, int quantity, Product product, User user) {
+	public OrderProducts(long id, int quantity, Product product, Order order) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.product = product;
-		this.user = user;
+		this.order = order;
 	}
 
 	public long getId() {
@@ -55,12 +55,12 @@ public class ShoppingCart {
 		this.product = product;
 	}
 
-	public User getUser() {
-		return user;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 	
 }

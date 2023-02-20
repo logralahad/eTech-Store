@@ -23,12 +23,12 @@ public class Role {
 	
 	public Role() {}
 
-	public Role(long id, List<User> users, String name, List<String> access) {
+	public Role(long id, String name, List<String> access, List<User> users) {
 		super();
 		this.id = id;
-		this.users = users;
-		this.name = name; 
+		this.name = name;
 		this.access = access;
+		this.users = users;
 	}
 
 	public long getId() {
@@ -37,14 +37,6 @@ public class Role {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 	public String getName() {
@@ -61,6 +53,14 @@ public class Role {
 
 	public void setAccess(List<String> access) {
 		this.access = access;
-	} 
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 	
 }
