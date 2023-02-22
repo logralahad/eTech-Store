@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,27 +18,35 @@ import com.ulsa.main.entity.OrderProducts;
 import com.ulsa.main.entity.Payment;
 import com.ulsa.main.entity.ShipmentAddress;
 import com.ulsa.main.entity.ShoppingCart;
+import com.ulsa.main.repository.OrderProductsRepository;
 import com.ulsa.main.repository.OrderRepository;
+import com.ulsa.main.repository.PaymentRepository;
+import com.ulsa.main.repository.ShippingAddressRepository;
 import com.ulsa.main.repository.ShoppingCartRepository;
-
 
 @Controller
 public class OrderController {
 
 	private final OrderRepository orderRepository;
 	private final ShoppingCartRepository shoppingCartRepository;
-	
+	private final ShippingAddressRepository shippingRepository;
+	private final PaymentRepository paymentRepository;
+	private final OrderProductsRepository orderProductRepository;
+
 	private final String mainPage = "pages/private/Orden/Ordenes";
-	private final String addPage = "pages/private/Orden/AddOrder";
-	private final String editPage = "pages/private/Orden/EditOrder";
 
 	@Autowired
-	public OrderController(OrderRepository orderRepository, ShoppingCartRepository shoppingCartRepository) {
+	public OrderController(OrderRepository orderRepository, ShoppingCartRepository shoppingCartRepository,
+			ShippingAddressRepository shippingRepository, PaymentRepository paymentRepository,
+			OrderProductsRepository orderProductRepository) {
 		super();
 		this.orderRepository = orderRepository;
 		this.shoppingCartRepository = shoppingCartRepository;
+		this.shippingRepository = shippingRepository;
+		this.paymentRepository = paymentRepository;
+		this.orderProductRepository = orderProductRepository;
 	}
-	
+
 	@GetMapping("/checkout")
 	public String viewCheckoutPage(Model model) {
 		System.out.println("Checkout");
@@ -48,32 +55,36 @@ public class OrderController {
 		for (ShoppingCart sp : items) {
 			subtotal += sp.getQuantity() * sp.getProduct().getPrice();
 		}
-		
+
 		model.addAttribute("items", items);
 		model.addAttribute("subtotal", subtotal);
 		model.addAttribute("newAddress", new ShipmentAddress());
-		return "pages/public/Checkout"; 
+		return "pages/public/Checkout";
 	}
 
 	@GetMapping("/dashboard/ordenes")
 	public String viewOrdernesPage(Model model) {
-		System.out.println("Ordernes");
+		System.out.println("Ordenes");
 		model.addAttribute("orders", orderRepository.findAll());
 		return this.mainPage;
 	}
 
-
 	@PostMapping("/order/add")
-	public String addOrder(@Validated ShipmentAddress ship,@RequestParam String shipping,
-			@RequestParam String payment, BindingResult result, Model model) {
+	public String addOrder(@Validated ShipmentAddress ship, @RequestParam String shipping, @RequestParam String payment,
+			@RequestParam String totalOrder,BindingResult result, Model model) {
+		System.out.println(totalOrder);
+		shippingRepository.save(ship);
+
 		Payment paymentT = new Payment();
 		paymentT.setProvider(payment);
 		paymentT.setTransaction_id("ULSA-2023");
-		
+		paymentRepository.save(paymentT);
+
 		Order order = new Order();
 		order.setShipment_type(shipping);
 		order.setShipment_address(ship);
 		order.setPayment(paymentT);
+		order.setTotal(Float.parseFloat(totalOrder));
 		orderRepository.save(order);
 
 		Set<OrderProducts> ops = new HashSet<OrderProducts>();
@@ -84,7 +95,8 @@ public class OrderController {
 			op.setProduct(sp.getProduct());
 			ops.add(op);
 		}
-		
+		orderProductRepository.saveAll(ops);
+
 		model.addAttribute("orders", orderRepository.findAll());
 		return this.mainPage;
 	}

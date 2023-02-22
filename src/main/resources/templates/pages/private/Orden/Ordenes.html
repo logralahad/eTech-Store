@@ -92,7 +92,6 @@
 								<tr class="table__row" th:each="order: ${orders}">
 									<td class="table__td"><span class="text-grey" th:text="'#' + ${order.id}"></span>
 									</td>
-									<td class="table__td" th:text="${order.user.first_name} + ' ' + ${order.user.last_name}"></td>
 									<td class="table__td" th:text="${order.shipment_type}"></td>
 									<td class="table__td" th:text="'$' + ${order.total}"></td>
 									<td class="table__td" style="display: flex;">
