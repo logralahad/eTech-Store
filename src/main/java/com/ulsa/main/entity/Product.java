@@ -1,6 +1,7 @@
 package com.ulsa.main.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,12 +44,19 @@ public class Product {
     private Set<OrderProducts> order_products;
 	
 	@ManyToMany(mappedBy = "products")
-    private Set<User> users;
+    private Set<User> users  = new HashSet<User>();
+	
+	@ManyToMany(mappedBy = "products")
+    private Set<Color> colors  = new HashSet<Color>();
+	
+	@ManyToMany(mappedBy = "products")
+    private Set<Category> categories = new HashSet<Category>();
 
 	public Product() {}
 
 	public Product(String id, String name, String description, float price, List<String> tags, Date created_at,
-			Set<ShoppingCart> shopping_cart, Set<OrderProducts> order_products, Set<User> users) {
+			Set<ShoppingCart> shopping_cart, Set<OrderProducts> order_products, Set<User> users, Set<Color> colors,
+			Set<Category> categories) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -59,6 +67,8 @@ public class Product {
 		this.shopping_cart = shopping_cart;
 		this.order_products = order_products;
 		this.users = users;
+		this.colors = colors;
+		this.categories = categories;
 	}
 
 	public String getId() {
@@ -131,6 +141,22 @@ public class Product {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+
+	public Set<Color> getColors() {
+		return colors;
+	}
+
+	public void setColors(Set<Color> colors) {
+		this.colors = colors;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
 	
 }

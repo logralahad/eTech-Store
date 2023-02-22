@@ -17,9 +17,9 @@ import com.ulsa.main.repository.OrderRepository;
 public class OrderController {
 
 	private final OrderRepository orderRepository;
-	private final String mainPage = "pages/private/Order/Ordenes";
-	private final String addPage = "pages/private/Order/AddOrder";
-	private final String editPage = "pages/private/Order/EditOrder";
+	private final String mainPage = "pages/private/Orden/Ordenes";
+	private final String addPage = "pages/private/Orden/AddOrder";
+	private final String editPage = "pages/private/Orden/EditOrder";
 
 	@Autowired
 	public OrderController(OrderRepository orderRepository) {
@@ -27,7 +27,7 @@ public class OrderController {
 		this.orderRepository = orderRepository;
 	}
 
-	@GetMapping("/dashboard/ordernes")
+	@GetMapping("/dashboard/ordenes")
 	public String viewOrdernesPage(Model model) {
 		System.out.println("Ordernes");
 		model.addAttribute("orders", orderRepository.findAll());

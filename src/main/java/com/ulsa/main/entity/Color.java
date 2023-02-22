@@ -19,8 +19,15 @@ public class Color{
 	@Nonnull
 	private String hexa;
 	
-	@Nonnull
-	@ManyToMany(targetEntity = Product.class)
+	@ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "colors_products",
+            joinColumns = {@JoinColumn(name = "color_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+    )
 	private Set<Product> products;
 	
 	public Color() {}

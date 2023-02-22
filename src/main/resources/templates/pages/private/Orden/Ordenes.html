@@ -18,7 +18,7 @@
 
 	<div id="orders-main">
 		<div class="page-header">
-			<h1 class="page-header__title">Colores</h1>
+			<h1 class="page-header__title">Ordenes</h1>
 		</div>
 
 		<div class="toolbox">
@@ -56,14 +56,6 @@
 								</div>
 							</form>
 						</div>
-						<div class="col-auto">
-							<a th:href="@{/dashboard/colores/agregar}" class="button-add button-add--blue"><span
-									class="button-add__icon">
-									<svg class="icon-icon-plus">
-										<use xlink:href="#icon-plus"></use>
-									</svg></span><span class="button-add__text"></span>
-							</a>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -74,39 +66,37 @@
 				data-simplebar>
 				<table class="table table--lines">
 					<colgroup>
+						<col class="colgroup-1">
+						<col class="colgroup-4">
+						<col class="colgroup-3">
 						<col class="colgroup-2">
-						<col class="colgroup-3">
-						<col class="colgroup-3">
 						<col>
 					</colgroup>
 					<thead class="table__header">
 						<tr class="table__header-row">
 							<th class="table__th"><span>Id</span></th>
-							<th class="table__th"><span class="align-middle">Nombre</span>
-							<th class="table__th"><span class="align-middle">C&oacute;digo hexadecimal</span>
+							<th class="table__th"><span class="align-middle">Cliente</span>
+							<th class="table__th"><span class="align-middle">Env&iacute;o</span>
+							<th class="table__th"><span class="align-middle">Total</span>
 							<th class="table__actions"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<div th:switch="${colors.size()}">
+						<div th:switch="${orders.size()}">
 							<div th:case="0">
 								<tr class="table__row">
 									<td class="table__td" colspan="9999">No hay registros</td>
 								</tr>
 							</div>
 							<div th:case="*">
-								<tr class="table__row" th:each="color: ${colors}">
-									<td class="table__td"><span class="text-grey" th:text="'#' + ${color.id}"></span>
+								<tr class="table__row" th:each="order: ${orders}">
+									<td class="table__td"><span class="text-grey" th:text="'#' + ${order.id}"></span>
 									</td>
-									<td class="table__td" th:text="${color.name}"></td>
-									<td class="table__td" th:text="${color.hexa}"></td>
+									<td class="table__td" th:text="${order.user.first_name} + ' ' + ${order.user.last_name}"></td>
+									<td class="table__td" th:text="${order.shipment_type}"></td>
+									<td class="table__td" th:text="'$' + ${order.total}"></td>
 									<td class="table__td" style="display: flex;">
-										<a th:href="@{/color/edit/{id}(id=${color.id})}"
-											class="dropdown-items__link"><span class="dropdown-items__link-icon">
-												<svg class="icon-icon-drafts">
-													<use xlink:href="#icon-drafts"></use>
-												</svg></span></a>
-										<a th:href="@{/color/delete/{id}(id=${color.id})}"
+										<a th:href="@{/order/delete/{id}(id=${order.id})}"
 											class="dropdown-items__link"><span class="dropdown-items__link-icon">
 												<svg class="icon-icon-trash">
 													<use xlink:href="#icon-trash"></use>

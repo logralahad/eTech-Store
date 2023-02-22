@@ -3,10 +3,13 @@ package com.ulsa.main.entity;
 import java.util.Set;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -20,8 +23,15 @@ public class Category {
 	@Nonnull
 	private String name;
 	
-	@Nonnull
-	@ManyToMany(targetEntity = Product.class)
+	@ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "categories_products",
+            joinColumns = {@JoinColumn(name = "category_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+    )
 	private Set<Product> products;
 	
 	public Category() {}
