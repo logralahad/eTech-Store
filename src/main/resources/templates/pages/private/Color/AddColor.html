@@ -1,0 +1,49 @@
+!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
+		~{::title},
+		~{::#add-color-styles},
+		~{::#add-color-sidebar},
+		~{::#add-color-main},
+	)}">
+
+<head>
+	<title>Agregar color - eTech</title>
+	<th:block id="add-color-styles"> </th:block>
+</head>
+
+<body>
+	<div id="add-color-sidebar">
+		<div th:replace="~{components/Dashboard/Sidebar :: activeItem(name='Colores')}"></div>
+	</div>
+
+	<div id="add-color-main">
+		<form action="#" th:action="@{/color/add}" th:object="${newColor}" method="post">
+			<div class="row row--md">
+				<div class="col-12 form-group form-group--lg">
+					<label class="form-label">Nombre</label>
+					<div class="input-group">
+						<input class="input" type="text" placeholder="" th:field="*{name}" required>
+					</div>
+				</div>
+
+				<div class="col-12 form-group form-group--lg">
+					<label class="form-label">Valor hexadecimal</label>
+					<div class="input-group">
+						<input class="input" type="text" placeholder="" th:field="*{hexa}" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="row row--md">
+				<div class="col-6"><button type="submit" class="button button--primary button--block"><span
+							class="button__text">Agregar</span>
+					</button></div>
+				<div class="col-6"> <a th:href="@{/dashboard/colores}"
+						class="button button--secondary button--block"><span class="button__text">Cancelar</span>
+					</a></div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

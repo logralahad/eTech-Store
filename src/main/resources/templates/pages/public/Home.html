@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PublicLayout :: main-fragment(
+		~{::title},
+		~{::#home-styles},
+		~{::#home-header},
+		~{::#home-main},
+		~{::#home-footer}
+	)}">
+
+<head>
+	<title>Bienvenido a eTech</title>
+	<th:block id="home-styles"> </th:block>
+</head>
+
+<body>
+	<div id="home-header" th:replace="~{/components/Store/Header/HomeHeader}"></div>
+
+	<div id="home-main">
+		<h2> Home content</h2>
+		<div> This is the content of the home page</div>
+
+		<div th:replace="~{/components/Store/Header/HeaderSearchModal}"></div>
+		<div th:replace="~{/components/Store/Header/HeaderCart}"></div>
+	</div>
+
+	<div id="home-footer" th:replace="~{/components/Store/Footer}"></div>
+</body>
+
+</html>

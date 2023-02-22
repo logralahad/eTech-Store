@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
+		~{::title},
+		~{::#colors-styles},
+		~{::#colors-sidebar},
+		~{::#colors-main},
+	)}">
+
+<head>
+	<title>Colores - eTech</title>
+	<th:block id="colors-styles"> </th:block>
+</head>
+
+<body>
+	<div id="colors-sidebar">
+		<div th:replace="~{components/Dashboard/Sidebar :: activeItem(name='Colores')}"></div>
+	</div>
+
+	<div id="colors-main">
+		<div class="page-header">
+			<h1 class="page-header__title">Colores</h1>
+		</div>
+
+		<div class="toolbox">
+			<div class="toolbox__row row gutter-bottom-xs">
+				<div class="toolbox__left col-12 col-lg">
+					<div class="toolbox__left-row row row--xs gutter-bottom-xs">
+						<div class="form-group form-group--inline col-12 col-sm-auto">
+							<label class="form-label">Mostrar</label>
+							<div class="input-group input-group--white input-group--append">
+								<input class="input input--select" type="text" value="10" size="1"
+									data-toggle="dropdown" readonly><span class="input-group__arrow">
+									<svg class="icon-icon-keyboard-down">
+										<use xlink:href="#icon-keyboard-down"></use>
+									</svg></span>
+								<div class="dropdown-menu dropdown-menu--right dropdown-menu--fluid js-dropdown-select">
+									<a class="dropdown-menu__item" href="#" tabindex="0" data-value="5">5</a>
+									<a class="dropdown-menu__item active" href="#" tabindex="0" data-value="10">10</a><a
+										class="dropdown-menu__item" href="#" tabindex="0" data-value="15">15</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="toolbox__right col-12 col-lg-auto">
+					<div class="toolbox__right-row row row--xs flex-nowrap">
+						<div class="col col-lg-auto">
+							<form class="toolbox__search" method="GET">
+								<div class="input-group input-group--white input-group--prepend">
+									<div class="input-group__prepend">
+										<svg class="icon-icon-search">
+											<use xlink:href="#icon-search"></use>
+										</svg>
+									</div>
+									<input class="input" type="text" placeholder="Buscar...">
+								</div>
+							</form>
+						</div>
+						<div class="col-auto">
+							<a th:href="@{/dashboard/colores/agregar}" class="button-add button-add--blue"><span
+									class="button-add__icon">
+									<svg class="icon-icon-plus">
+										<use xlink:href="#icon-plus"></use>
+									</svg></span><span class="button-add__text"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="table-wrapper">
+			<div class="table-wrapper__content table-products table-collapse scrollbar-thin scrollbar-visible"
+				data-simplebar>
+				<table class="table table--lines">
+					<colgroup>
+						<col class="colgroup-2">
+						<col class="colgroup-3">
+						<col class="colgroup-3">
+						<col>
+					</colgroup>
+					<thead class="table__header">
+						<tr class="table__header-row">
+							<th class="table__th"><span>Id</span></th>
+							<th class="table__th"><span class="align-middle">Nombre</span>
+							<th class="table__th"><span class="align-middle">C&oacute;digo hexadecimal</span>
+							<th class="table__actions"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<div th:switch="${colors.size()}">
+							<div th:case="0">
+								<tr class="table__row">
+									<td class="table__td" colspan="9999">No hay registros</td>
+								</tr>
+							</div>
+							<div th:case="*">
+								<tr class="table__row" th:each="color: ${colors}">
+									<td class="table__td"><span class="text-grey" th:text="'#' + ${color.id}"></span>
+									</td>
+									<td class="table__td" th:text="${color.name}"></td>
+									<td class="table__td" th:text="${color.hexa}"></td>
+									<td class="table__td" style="display: flex;">
+										<a th:href="@{/color/edit/{id}(id=${color.id})}"
+											class="dropdown-items__link"><span class="dropdown-items__link-icon">
+												<svg class="icon-icon-drafts">
+													<use xlink:href="#icon-drafts"></use>
+												</svg></span></a>
+										<a th:href="@{/color/delete/{id}(id=${color.id})}"
+											class="dropdown-items__link"><span class="dropdown-items__link-icon">
+												<svg class="icon-icon-trash">
+													<use xlink:href="#icon-trash"></use>
+												</svg></span></a>
+									</td>
+								</tr>
+							</div>
+						</div>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

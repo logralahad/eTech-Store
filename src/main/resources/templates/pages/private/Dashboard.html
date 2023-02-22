@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
+		~{::title},
+		~{::#home-styles},
+		~{::#home-sidebar},
+		~{::#home-main},
+	)}">
+
+<head>
+	<title>Tablero - eTech</title>
+	<th:block id="home-styles"> </th:block>
+</head>
+
+<body>
+	<div id="home-sidebar">
+		<div th:replace="components/Dashboard/Sidebar :: activeItem(name='Inicio')"></div>
+	</div>
+
+	<div id="home-main">
+		<h2> Home content</h2>
+		<div> This is the content of the home page</div>
+	</div>
+</body>
+
+</html>

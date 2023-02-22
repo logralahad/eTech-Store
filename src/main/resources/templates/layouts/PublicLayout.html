@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="main-fragment(title, styles, header, main, footer)">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title th:replace="${title}">Public Layout</title>
+
+	<link rel="shortcut icon" type="image/x-icon" th:ref="@{/store/images/favicon.png}" href="../../store/images/favicon.png">
+
+	<!-- 3rd party CSS -->
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/bootstrap.min.css}" href="../../store/css/vendor/bootstrap.min.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/font-awesome.css}" href="../../store/css/vendor/font-awesome.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/flaticon/flaticon.css}" href="../../store/css/vendor/flaticon/flaticon.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/slick.css}" href="../../store/css/vendor/slick.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/slick-theme.css}" href="../../store/css/vendor/slick-theme.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/jquery-ui.min.css}" href="../../store/css/vendor/jquery-ui.min.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/jquery-ui.min.css}" href="../../store/css/vendor/jquery-ui.min.css">
+	<link rel="stylesheet" th:ref="@{/store/css/vendor/magnific-popup.css}" href="../../store/css/vendor/magnific-popup.css">
+	<link rel="stylesheet" th:ref="@{/store/css/css/vendor/base.css}" href="../../store/css/vendor/base.css">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" th:ref="@{/store/css/style.min.css}" href="../../store/css/style.min.css">
+
+	<th:block th:replace="${styles} ?: ~{}"></th:block>
+</head>
+
+<body class="sticky-header newsletter-popup-modal">
+
+	<header th:insert="${header} ?: ~{}">
+		<h1>P&aacute;gina p&uacute;blica</h1>
+	</header>
+
+	<div th:insert="${main} ?: ~{}">
+		<h1>Default page</h1>
+		<p>Main content</p>
+	</div>
+
+	<footer th:insert="${footer} ?: ~{}">
+		<p>Public footer</p>
+	</footer>
+	
+
+	<!-- 3rd party JS -->
+	<script th:src="@{/store/js/vendor/jquery.js}" src="../../store/js/vendor/jquery.js"></script>
+	<script th:src="@{/store/js/vendor/popper.min.js}" src="../../store/js/vendor/popper.min.js"></script>
+	<script th:src="@{/store/js/vendor/bootstrap.min.js}" src="../../store/js/vendor/bootstrap.min.js"></script>
+	<script th:src="@{/store/js/vendor/slick.min.js}" src="../../store/js/vendor/slick.min.js"></script>
+	<script th:src="@{/store/js/vendor/js.cookie.js}" src="../../store/js/vendor/js.cookie.js"></script>
+	<script th:src="@{/store/js/vendor/jquery-ui.min.js}" src="../../store/js/vendor/jquery-ui.min.js"></script>
+	<script th:src="@{/store/js/vendor/jquery.countdown.min.js}" src="../../store/js/vendor/jquery.countdown.min.js"></script>
+	<script th:src="@{/store/js/vendor/sal.js}" src="../../store/js/vendor/sal.js"></script>
+	<script th:src="@{/store/js/vendor/jquery.magnific-popup.min.js}"
+		src="../../store/js/vendor/jquery.magnific-popup.min.js"></script>
+	<script th:src="@{/store/js/vendor/imagesloaded.pkgd.min.js}" src="../../store/js/vendor/imagesloaded.pkgd.min.js"></script>
+	<script th:src="@{/store/js/vendor/isotope.pkgd.min.js}" src="../../store/js/vendor/isotope.pkgd.min.js"></script>
+	<script th:src="@{/store/js/vendor/counterup.js}" src="../../store/js/vendor/counterup.js"></script>
+	<script th:src="@{/store/js/vendor/waypoints.min.js}" src="../../store/js/vendor/waypoints.min.js"></script>
+
+	<!-- Main JS -->
+	<script th:src="@{/store/js/main.js}" src="../../store/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
+		~{::title},
+		~{::#roles-styles},
+		~{::#roles-sidebar},
+		~{::#roles-main},
+	)}">
+
+<head>
+	<title>Roles - eTech</title>
+	<th:block id="roles-styles"> </th:block>
+</head>
+
+<body>
+	<div id="roles-sidebar">
+		<div th:replace="components/Dashboard/Sidebar :: activeItem(name='Roles')"></div>
+	</div>
+
+	<div id="roles-main">
+		<h2> Home content</h2>
+		<div> This is the content of the home page</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
+		~{::title},
+		~{::#products-styles},
+		~{::#products-sidebar},
+		~{::#products-main},
+	)}">
+
+<head>
+	<title>Productos - eTech</title>
+	<th:block id="products-styles"> </th:block>
+</head>
+
+<body>
+	<div id="products-sidebar">
+		<div th:replace="components/Dashboard/Sidebar :: activeItem(name='Productos')"></div>
+	</div>
+
+	<div id="products-main">
+		<h2> Home content</h2>
+		<div> This is the content of the home page</div>
+	</div>
+</body>
+
+</html>
