@@ -15,7 +15,6 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID )
 	private String id;
-	
 
 	@Column(columnDefinition = "VARCHAR(255)", nullable = false)
 	private String username;
@@ -39,10 +38,10 @@ public class User {
 	@Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "DATE")
 	private Date created_at;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders; 
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<ShoppingCart> shopping_cart;
 	
 	@ManyToOne

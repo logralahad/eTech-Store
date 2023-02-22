@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
 		~{::title},
-		~{::#users-styles},
-		~{::#users-sidebar},
-		~{::#users-main},
+		~{::#categories-styles},
+		~{::#categories-sidebar},
+		~{::#categories-main},
 	)}">
 
 <head>
-	<title>Usuarios - eTech</title>
-	<th:block id="users-styles"> </th:block>
+	<title>Categorias - eTech</title>
+	<th:block id="categories-styles"> </th:block>
 </head>
 
 <body>
-	<div id="users-sidebar">
-		<div th:replace="components/Dashboard/Sidebar :: activeItem(name='Usuarios')"></div>
+	<div id="categories-sidebar">
+		<div th:replace="~{components/Dashboard/Sidebar :: activeItem(name='Categorias')}"></div>
 	</div>
 
-	<div id="users-main">
+	<div id="categories-main">
 		<div class="page-header">
-			<h1 class="page-header__title">Usuarios</h1>
+			<h1 class="page-header__title">Categorias</h1>
 		</div>
 
 		<div class="toolbox">
@@ -57,7 +57,7 @@
 							</form>
 						</div>
 						<div class="col-auto">
-							<a th:href="@{/dashboard/usuarios/agregar}" class="button-add button-add--blue"><span
+							<a th:href="@{/dashboard/categorias/agregar}" class="button-add button-add--blue"><span
 									class="button-add__icon">
 									<svg class="icon-icon-plus">
 										<use xlink:href="#icon-plus"></use>
@@ -75,37 +75,35 @@
 				<table class="table table--lines">
 					<colgroup>
 						<col class="colgroup-4">
-						<col class="colgroup-3">
-						<col class="colgroup-3">
+						<col class="colgroup-4">
 						<col>
 					</colgroup>
 					<thead class="table__header">
 						<tr class="table__header-row">
+							<th class="table__th"><span>Id</span></th>
 							<th class="table__th"><span class="align-middle">Nombre</span>
-							<th class="table__th"><span class="align-middle">Correo</span>
-							<th class="table__th"><span class="align-middle">Rol</span>
 							<th class="table__actions"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<div th:switch="${users.size()}">
+						<div th:switch="${categories.size()}">
 							<div th:case="0">
 								<tr class="table__row">
 									<td class="table__td" colspan="9999">No hay registros</td>
 								</tr>
 							</div>
 							<div th:case="*">
-								<tr class="table__row" th:each="user: ${users}">
-									<td class="table__td" th:text="${user.first_name} + ' ' + ${user.last_name}"></td>
-									<td class="table__td" th:text="${user.email}"></td>
-									<td class="table__td" th:text="${user.role.name}"></td>
+								<tr class="table__row" th:each="category: ${categories}">
+									<td class="table__td"><span class="text-grey" th:text="'#' + ${category.id}"></span>
+									</td>
+									<td class="table__td" th:text="${category.name}"></td>
 									<td class="table__td" style="display: flex;">
-										<a th:href="@{/user/edit/{id}(id=${user.id})}"
+										<a th:href="@{/category/edit/{id}(id=${category.id})}"
 											class="dropdown-items__link"><span class="dropdown-items__link-icon">
 												<svg class="icon-icon-drafts">
 													<use xlink:href="#icon-drafts"></use>
 												</svg></span></a>
-										<a th:href="@{/user/delete/{id}(id=${user.id})}"
+										<a th:href="@{/category/delete/{id}(id=${category.id})}"
 											class="dropdown-items__link"><span class="dropdown-items__link-icon">
 												<svg class="icon-icon-trash">
 													<use xlink:href="#icon-trash"></use>

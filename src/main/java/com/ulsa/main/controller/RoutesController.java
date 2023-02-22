@@ -33,35 +33,5 @@ public class RoutesController {
 		System.out.println("Dashboard");
 		return "pages/private/Dashboard";
 	}
-	
-	@GetMapping("/dashboard/roles")
-	public String viewRolesPage(Model model) {
-		System.out.println("Roles");
-		return "pages/private/Rol/Roles";
-	}
-	
-	@GetMapping("/dashboard/usuarios")
-	public String viewUsuariosPage(Model model) {
-		System.out.println("Usuarios");
-		return "pages/private/Usuario/Usuarios";
-	}
-	
-	@GetMapping("/dashboard/productos")
-	public String viewProductosPage(Model model) {
-		System.out.println("Productos");
-		return "pages/private/Producto/Productos";
-	}
-	
-	@GetMapping("/dashboard/ordenes")
-	public String viewOrdenesPage(Model model) {
-		System.out.println("Ordenes");
-		return "pages/private/Orden/Ordenes";
-	}	
-	
-	@GetMapping("/dashboard/metodos-pago") 
-	public String viewPagosPage(Model model) {
-		System.out.println("Métodos de pago");
-		return "pages/private/Pagos/MetodosDePago";
-	}
 
 }

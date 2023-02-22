@@ -1,0 +1,83 @@
+!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PrivateLayout :: main-private-fragment(
+		~{::title},
+		~{::#edit-user-styles},
+		~{::#edit-user-sidebar},
+		~{::#edit-user-main},
+	)}">
+
+<head>
+	<title>Editar usuario - eTech</title>
+	<th:block id="edit-user-styles"> </th:block>
+</head>
+
+<body>
+	<div id="edit-user-sidebar">
+		<div th:replace="~{components/Dashboard/Sidebar :: activeItem(name='Usuarios')}"></div>
+	</div>
+
+	<div id="edit-user-main">
+		<form action="#" th:action="@{/user/update/{id}(id=${editUser.id})}" th:object="${editUser}" method="post">
+			<div class="row row--md">
+				<div class="col-md-12 col-lg-6 form-group form-group--lg">
+					<label class="form-label">Nombre(s)</label>
+					<div class="input-group">
+						<input class="input" type="text" placeholder="" th:field="*{first_name}" required>
+					</div>
+				</div>
+				
+				<div class="col-md-12 col-lg-6 form-group form-group--lg">
+					<label class="form-label">Apellido(s)</label>
+					<div class="input-group">
+						<input class="input" type="text" placeholder="" th:field="*{last_name}" required>
+					</div>
+				</div>
+				
+				<div class="col-md-12 col-lg-6 form-group form-group--lg">
+					<label class="form-label">Usuario</label>
+					<div class="input-group">
+						<input class="input" type="text" placeholder="" th:field="*{username}" required>
+					</div>
+				</div>
+				
+				<div class="col-md-12 col-lg-6 form-group form-group--lg">
+					<label class="form-label">Rol</label>
+					<div class="input-group input-group--append">
+						<select class="input js-input-select input--fluid" data-placeholder="" th:field="*{role}">
+						<option th:each="record : ${roles}" th:field="*{role}" th:value="${{record.id}}"
+							th:text="${record.name}"></option>
+					</select>
+					</div>
+					
+				</div>
+				
+				<div class="col-md-12 col-lg-6 form-group form-group--lg">
+					<label class="form-label">Correo</label>
+					<div class="input-group">
+						<input class="input" type="email" placeholder="" th:field="*{email}" required>
+					</div>
+				</div>
+				
+				<div class="col-md-12 col-lg-6 form-group form-group--lg">
+					<label class="form-label">Nueva contraseña</label>
+					<div class="input-group">
+						<input class="input" type="password" placeholder="" name="newPassword">
+					</div>
+				</div>
+				
+				<input class="input" type="hidden"th:field="*{password}" required>
+			</div>
+
+			<div class="row row--md">
+				<div class="col-6"><button type="submit" class="button button--primary button--block"><span
+							class="button__text">Guardar</span>
+					</button></div>
+				<div class="col-6"> <a th:href="@{/dashboard/usuarios}"
+						class="button button--secondary button--block"><span class="button__text">Cancelar</span>
+					</a></div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

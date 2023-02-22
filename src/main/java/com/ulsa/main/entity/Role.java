@@ -7,21 +7,22 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "roles")
 public class Role {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id; 
-	
+	private long id;
+
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String name;
 
 	@Column(columnDefinition = "VARCHAR(50)[]", nullable = false)
 	private List<String> access;
 
-	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<User> users; 
-	
-	public Role() {}
+	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+	private List<User> users;
+
+	public Role() {
+	}
 
 	public Role(long id, String name, List<String> access, List<User> users) {
 		super();
@@ -60,7 +61,12 @@ public class Role {
 	}
 
 	public void setUsers(List<User> users) {
-		this.users = users;
+		if (this.users == null) {
+			this.users = users;
+		} else {
+			this.users.retainAll(users);
+			this.users.addAll(users);
+		}
 	}
-	
+
 }
