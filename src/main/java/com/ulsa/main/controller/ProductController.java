@@ -59,9 +59,10 @@ public class ProductController {
 	public String editProduct(@PathVariable("id") String id, Model model) {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("No existe ese elemento"));
+		System.out.println(product.getCategories().toString());
 		model.addAttribute("editProduct", product);
-		model.addAttribute("colors", colorRepository.findAll());
-		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("catalogCol", colorRepository.findAll());
+		model.addAttribute("catalagoCat", categoryRepository.findAll());
 		return this.editPage;
 	}
 
@@ -76,10 +77,7 @@ public class ProductController {
 
 	@PostMapping("/product/add")
 	public String addProduct(@Validated Product product, @RequestParam List<Long> categorias,
-			@RequestParam List<Long> colores, BindingResult result, Model model) {
-		System.out.println("category " + categorias.toString());
-		System.out.println("colores " + colores.toString());
-		
+			@RequestParam List<Long> colores, BindingResult result, Model model) {		
 		List<Category> categories = categoryRepository.findAllById(categorias);
 		List<Color> colors = colorRepository.findAllById(colores);
 		
@@ -100,7 +98,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/product/update/{id}")
-	public String updateProduct(@PathVariable("id") long id, @Validated Product product, BindingResult result,
+	public String updateProduct(@PathVariable("id") String id, @Validated Product product, BindingResult result,
 			Model model) {
 		productRepository.save(product);
 		model.addAttribute("products", productRepository.findAll());

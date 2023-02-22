@@ -37,19 +37,19 @@ public class Product {
 	@Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "DATE")
 	private Date created_at;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<ShoppingCart> shopping_cart;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<OrderProducts> order_products;
 	
-	@ManyToMany(mappedBy = "products")
+	@ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private Set<User> users  = new HashSet<User>();
 	
-	@ManyToMany(mappedBy = "products")
+	@ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private Set<Color> colors  = new HashSet<Color>();
 	
-	@ManyToMany(mappedBy = "products")
+	@ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private Set<Category> categories = new HashSet<Category>();
 
 	public Product() {}

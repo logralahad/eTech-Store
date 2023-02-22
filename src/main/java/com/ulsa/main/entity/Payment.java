@@ -16,7 +16,7 @@ public class Payment {
 	@Column(columnDefinition = "VARCHAR(255)", nullable = false)
 	private String transaction_id;
 	
-	@OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Order order;
 
 	public Payment() {}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PublicLayout :: main-fragment(
+		~{::title},
+		~{::#wishlist-styles},
+		~{::#wishlist-header},
+		~{::#wishlist-main},
+		~{::#wishlist-footer}
+	)}">
+
+<head>
+	<title>Mi lista - eTech</title>
+	<th:block id="wishlist-styles"> </th:block>
+</head>
+
+<body>
+	<div id="wishlist-header" th:replace="~{/components/Store/Header/HomeHeader}"></div>
+
+	<div id="wishlist-main">
+		<div class="axil-wishlist-area axil-section-gap">
+			<div class="container">
+				<div class="product-table-heading">
+					<h4 class="title">Lista de deseos</h4>
+				</div>
+
+				<div class="table-responsive">
+					<table class="table axil-product-table axil-wishlist-table">
+						<thead>
+							<tr>
+								<th scope="col" class="product-remove"></th>
+								<th scope="col" class="product-thumbnail">Producto</th>
+								<th scope="col" class="product-title"></th>
+								<th scope="col" class="product-price">Precio</th>
+								<th scope="col" class="product-add-cart"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product: ${items}">
+								<td class="product-remove"><a th:href="@{/wishlist/delete/{productId}(productId=${product.id})}" ><i
+											class="fal fa-times"></i></a>
+								</td>
+								<td class="product-thumbnail"><a href="#"><img
+											th:src="@{/store/images/product/electric/product-01.png}"
+											alt="Digital Product"></a>
+								</td>
+								<td class="product-title"><a href="#" th:text="${product.name}"></a></td>
+								<td class="product-price" data-title="Price" th:text="'$ ' + ${product.price}"></td>
+								<td class="product-add-cart"><a href="/shopping-cart" class="axil-btn btn-outline">Add to
+										Cart</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div th:replace="~{/components/Store/Header/HeaderSearchModal}"></div>
+				<div th:replace="~{/components/Store/Header/HeaderCart}"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wishlist-footer" th:replace="~{/components/Store/Footer}"></div>
+</body>
+
+</html>

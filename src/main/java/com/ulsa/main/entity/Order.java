@@ -26,7 +26,7 @@ public class Order {
 	@OneToOne(fetch = FetchType.LAZY)
     private Payment payment;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderProducts> order_products;
 	
     @ManyToOne

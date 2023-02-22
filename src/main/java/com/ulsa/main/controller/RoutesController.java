@@ -9,12 +9,6 @@ import com.ulsa.main.entity.User;
 @Controller
 public class RoutesController {
 
-	@GetMapping("/")
-	public String viewHomePage() {
-		System.out.println("Welcome");
-		return "pages/public/Home";
-	}
-
 	@GetMapping("/login")
 	public String viewLoginPage() {
 		System.out.println("Sign In");

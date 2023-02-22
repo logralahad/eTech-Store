@@ -1,0 +1,31 @@
+<div class="col-lg-6">
+	<div class="axil-checkout-billing">
+		<h4 class="title mb--40">Direcci&oacute;n de entrega</h4>
+		<div class="form-group">
+			<label>Direcci&oacute;n<span>*</span></label>
+			<input type="text" id="address1" class="mb--15" placeholder="Calle y colonia" th:field="*{street_adress}">
+		</div>
+		<div class="form-group">
+			<label>Estado <span>*</span></label>
+			<select id="Estado" th:field="*{state}">
+				<option value="Oaxaca">Oaxaca</option>
+				<option value="Chiapas">Chiapas</option>
+				<option value="CDMX">CDMX</option>
+				<option value="Puebla">Puebla</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Pais<span>*</span></label>
+			<select id="Pais" th:field="*{country}">
+				<option value="Mexico">Mexico</option>
+				<option value="USA">USA</option>
+				<option value="Alemania">Alemania</option>
+				<option value="Japon">Japon</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Tel&eacute;fono <span>*</span></label>
+			<input type="tel" id="phone" th:field="*{phone}">
+		</div>
+	</div>
+</div>

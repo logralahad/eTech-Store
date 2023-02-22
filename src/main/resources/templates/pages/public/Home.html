@@ -16,8 +16,12 @@
 	<div id="home-header" th:replace="~{/components/Store/Header/HomeHeader}"></div>
 
 	<div id="home-main">
-		<h2> Home content</h2>
-		<div> This is the content of the home page</div>
+		
+		<div class="axil-product-area bg-color-white axil-section-gap">
+			<div class="container">
+				<div th:replace="~{/components/Store/Home/ExploreProducts}"></div>
+			</div>
+		</div>
 
 		<div th:replace="~{/components/Store/Header/HeaderSearchModal}"></div>
 		<div th:replace="~{/components/Store/Header/HeaderCart}"></div>

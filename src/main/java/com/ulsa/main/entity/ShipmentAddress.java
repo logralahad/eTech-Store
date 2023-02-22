@@ -23,7 +23,7 @@ public class ShipmentAddress {
 	private String phone;
 
 	
-	@OneToOne(mappedBy = "shipment_address", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "shipment_address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Order order;
 
 	public ShipmentAddress() {

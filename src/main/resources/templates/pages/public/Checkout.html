@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org" th:replace="~{layouts/PublicLayout :: main-fragment(
+		~{::title},
+		~{::#checkout-styles},
+		~{::#checkout-header},
+		~{::#checkout-main},
+		~{::#checkout-footer}
+	)}">
+
+<head>
+	<title>Checkout</title>
+	<th:block id="checkout-styles"> </th:block>
+</head>
+
+<body>
+	<div id="checkout-header" th:replace="~{/components/Store/Header/HomeHeader}"></div>
+
+	<div id="checkout-main">
+		<div class="axil-checkout-area axil-section-gap">
+			<div class="container">
+				<form action="#" th:action="@{/order/add}" th:object="${newAddress}" method="post">
+					<div class="row">
+						<div th:replace="~{/components/Store/Checkout/AddressDetails}"></div>
+						<div th:replace="~{/components/Store/Checkout/OrderDetail}"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="checkout-footer" th:replace="~{/components/Store/Footer}"></div>
+</body>
+
+</html>
